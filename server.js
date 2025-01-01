@@ -8,6 +8,15 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 2000;
 
+const SERVER_IP = 'localhost';
+
+app.use(cors({
+    origin: ['https://first-project-angular.netlify.app'],
+    // origin: ['http://localhost:4200'],
+    methods: ['POST', 'GET', 'PUT', 'DELETE'],
+    credentials: true
+}));
+
 connectDB();
 
 app.use(cors());
@@ -19,5 +28,5 @@ app.use("/api/user", userRoutes);
 app.use("/uploads", express.static("uploads"));
 
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server is running on http://${SERVER_IP}:${PORT}`);
 });
