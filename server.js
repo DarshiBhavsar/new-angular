@@ -9,17 +9,16 @@ const app = express();
 const PORT = process.env.PORT || 2000;
 
 const SERVER_IP = 'localhost';
+app.use(
+    cors({
+        origin: ['https://angular-project-first.netlify.app'],
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        credentials: true,
+    })
+);
 
-app.use(cors({
-    origin: ['https://first-project-angular.netlify.app'],
-    // origin: ['http://localhost:4200'],
-    methods: ['POST', 'GET', 'PUT', 'DELETE'],
-    credentials: true
-}));
-
+app.use((cors()))
 connectDB();
-
-app.use(cors());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
